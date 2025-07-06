@@ -1,8 +1,3 @@
--- 📦 BẢOHUB V4 (Rayfield UI - Redz Style)
-
-local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
-local Player = game.Players.LocalPlayer
-
 local Window = Rayfield:CreateWindow({
    Name = "✨ BẢOHUB V4 - Redz Style",
    LoadingTitle = "BẢOHUB V4 đang khởi động...",
@@ -15,12 +10,13 @@ local Window = Rayfield:CreateWindow({
    Discord = {
       Enabled = false
    },
-   KeySystem = false
+   KeySystem = false,
 
-
-       Logo = "https://i.imgur.com/X5Xxnh1.png",         
-   LoadingImage = "https://i.imgur.com/X5Xxnh1.png"
+   -- 📌 Gắn logo vào đây:
+   Logo = "https://i.imgur.com/X5Xxnh1.png",         -- ← ảnh bạn vừa gửi
+   LoadingImage = "https://i.imgur.com/X5Xxnh1.png"  -- ← ảnh hiển thị khi loading
 })
+
 
 -- 🔥 TAB: FARM
 local FarmTab = Window:CreateTab("🥷 Auto Farm", 4483362458)
