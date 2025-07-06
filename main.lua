@@ -1,36 +1,131 @@
--- BẢOHUB V4 - GUI CÓ ĐA TAB HOẠT ĐỘNG 100%
+-- 📦 BẢOHUB V4 (Rayfield UI - Redz Style)
 
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("BẢOHUB V4 ✨", "DarkTheme")
+local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
+local Player = game.Players.LocalPlayer
 
--- TAB 1: FARM
-local FarmTab = Window:NewTab("Farm")
-local FarmSection = FarmTab:NewSection("Auto Farm")
-FarmSection:NewToggle("Auto Level", "Farm level tự động", function(state)
-    if state then
-        print("Bật Auto Level")
-    else
-        print("Tắt Auto Level")
-    end
-end)
+local Window = Rayfield:CreateWindow({
+   Name = "✨ BẢOHUB V4 - Redz Style",
+   LoadingTitle = "BẢOHUB V4 đang khởi động...",
+   LoadingSubtitle = "By baobelne",
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = "BảoHubV4",
+      FileName = "BảoCấuHình"
+   },
+   Discord = {
+      Enabled = false
+   },
+   KeySystem = false
+})
 
--- TAB 2: RAID
-local RaidTab = Window:NewTab("Raid")
-local RaidSection = RaidTab:NewSection("Auto Raid")
-RaidSection:NewButton("Bắt đầu Raid", "Tự động raid", function()
-    print("Đã nhấn nút Raid")
-end)
+-- 🔥 TAB: FARM
+local FarmTab = Window:CreateTab("🥷 Auto Farm", 4483362458)
+local FarmSec = FarmTab:CreateSection("Auto Level")
 
--- TAB 3: Teleport
-local TeleTab = Window:NewTab("Teleport")
-local TeleSection = TeleTab:NewSection("Dịch chuyển nhanh")
-TeleSection:NewDropdown("Chọn đảo", {"Starter", "Jungle", "Desert", "Snow"}, function(place)
-    print("Dịch chuyển đến: " .. place)
-end)
+_G.AutoFarm = false
+_G.Weapon = "Combat"
 
--- TAB 4: Settings
-local SetTab = Window:NewTab("Cài đặt")
-local SetSection = SetTab:NewSection("Tùy chọn")
-SetSection:NewKeybind("Ẩn/Hiện GUI", "Phím mở/tắt GUI", Enum.KeyCode.RightControl, function()
-    Library:ToggleUI()
-end)
+FarmTab:CreateInput({
+   Name = "Tên vũ khí",
+   PlaceholderText = "Ví dụ: Dragon Talon",
+   RemoveTextAfterFocusLost = false,
+   Callback = function(txt)
+      _G.Weapon = txt
+   end
+})
+
+FarmTab:CreateToggle({
+   Name = "Bật Auto Level",
+   CurrentValue = false,
+   Callback = function(v)
+      _G.AutoFarm = v
+      if v then AutoLevel() end
+   end
+})
+
+function Equip()
+   local Tool = Player.Backpack:FindFirstChild(_G.Weapon)
+   if Tool then
+      Player.Character.Humanoid:EquipTool(Tool)
+   end
+end
+
+function AutoLevel()
+   task.spawn(function()
+      while _G.AutoFarm do task.wait()
+         pcall(function()
+            local lv = Player.Data.Level.Value
+            local mob, quest, questPos, mobPos
+
+            if lv <= 10 then
+               mob = "Bandit"
+               quest = "BanditQuest1"
+               questPos = CFrame.new(1060,17,1548)
+               mobPos = CFrame.new(1142,18,1610)
+            elseif lv <= 30 then
+               mob = "Monkey"
+               quest = "JungleQuest"
+               questPos = CFrame.new(-1602,36,152)
+               mobPos = CFrame.new(-1449,67,88)
+            end
+
+            if mob and quest then
+               Equip()
+               Player.Character.HumanoidRootPart.CFrame = questPos
+               wait(1)
+               game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", quest, 1)
+
+               for _,v in pairs(workspace.Enemies:GetChildren()) do
+                  if v.Name == mob and v:FindFirstChild("HumanoidRootPart") then
+                     repeat
+                        Equip()
+                        Player.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame + Vector3.new(0,3,0)
+                        v.HumanoidRootPart.Anchored = true
+                        v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+                        v.HumanoidRootPart.Transparency = 0.5
+                        wait()
+                     until v.Humanoid.Health <= 0 or not _G.AutoFarm
+                  end
+               end
+            end
+         end)
+      end
+   end)
+end
+
+-- 🌊 TAB: SEA
+local SeaTab = Window:CreateTab("🌊 Sea Events", 13238613516)
+SeaTab:CreateSection("Tính năng Sea Beast đang cập nhật...")
+
+-- 🧬 TAB: RACE
+local RaceTab = Window:CreateTab("🧬 Race V4", 9606551333)
+RaceTab:CreateSection("Tính năng Auto Trial sẽ có sớm")
+
+-- ⚔️ TAB: BOSS
+local BossTab = Window:CreateTab("⚔️ Boss", 4581219946)
+BossTab:CreateSection("Sắp có Auto Boss riêng biệt")
+
+-- 🗺️ TAB: TELEPORT
+local TeleTab = Window:CreateTab("🗺️ Teleport", 6031075938)
+TeleTab:CreateSection("Dịch chuyển nhanh đến đảo")
+
+local locationList = {
+   ["Starter"] = CFrame.new(1085,17,1426),
+   ["Jungle"] = CFrame.new(-1619,36,143),
+   ["Desert"] = CFrame.new(1157,5,4322)
+}
+
+TeleTab:CreateDropdown({
+   Name = "Chọn đảo",
+   Options = {"Starter", "Jungle", "Desert"},
+   CurrentOption = "Starter",
+   Callback = function(opt)
+      Player.Character.HumanoidRootPart.CFrame = locationList[opt]
+   end
+})
+
+-- ⚙️ TAB: CÀI ĐẶT
+local SetTab = Window:CreateTab("⚙️ Cài đặt", 13548965959)
+SetTab:CreateSection("Phím tắt")
+
+SetTab:CreateParagraph({Title = "Toggle GUI", Content = "Bấm Right Ctrl để ẩn/hiện GUI"})
