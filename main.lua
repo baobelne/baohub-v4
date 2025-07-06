@@ -23,16 +23,16 @@ local FarmTab = Window:CreateTab("🥷 Auto Farm", 4483362458)
 local FarmSec = FarmTab:CreateSection("Auto Level")
 
 _G.AutoFarm = false
-_G.Weapon = "Combat"
-
-FarmTab:CreateInput({
-   Name = "Tên vũ khí",
-   PlaceholderText = "Ví dụ: Dragon Talon",
-   RemoveTextAfterFocusLost = false,
-   Callback = function(txt)
-      _G.Weapon = txt
+function Equip()
+   local backpack = Player.Backpack:GetChildren()
+   for _, tool in pairs(backpack) do
+      if tool:IsA("Tool") then
+         Player.Character.Humanoid:EquipTool(tool)
+         break -- chỉ cần trang bị 1 vũ khí đầu tiên tìm thấy
+      end
    end
-})
+end
+ 
 
 FarmTab:CreateToggle({
    Name = "Bật Auto Level",
