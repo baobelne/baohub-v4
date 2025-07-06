@@ -1,28 +1,39 @@
- local ScreenGui = Instance.new("ScreenGui")
-local Frame = Instance.new("Frame")
-local Button = Instance.new("TextButton")
+-- BẢOHUB V4 - GIAO DIỆN ĐA TAB
 
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-ScreenGui.Name = "BaoHubV4Test"
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("BẢOHUB V4 ✨", "Midnight")
 
-Frame.Size = UDim2.new(0, 250, 0, 150)
-Frame.Position = UDim2.new(0.5, -125, 0.5, -75)
-Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-Frame.Parent = ScreenGui
+-- ⚔️ TAB: AUTO FARM
+local FarmTab = Window:NewTab("Farm")
+local FarmSection = FarmTab:NewSection("Auto Farm")
+FarmSection:NewToggle("Auto Level", "Tự động farm level", function(state)
+    if state then
+        print("Đã bật auto level")
+        -- Gắn code farm vào đây
+    else
+        print("Đã tắt auto level")
+    end
+end)
 
-Button.Size = UDim2.new(1, 0, 0, 50)
-Button.Position = UDim2.new(0, 0, 0, 50)
-Button.Text = "BảoHub V4"
-Button.TextColor3 = Color3.fromRGB(255, 255, 255)
-Button.BackgroundColor3 = Color3.fromRGB(60, 120, 200)
-Button.Font = Enum.Font.Gotham
-Button.TextSize = 22
-Button.Parent = Frame
+-- 🔥 TAB: RAID
+local RaidTab = Window:NewTab("Raid")
+local RaidSection = RaidTab:NewSection("Auto Raid")
+RaidSection:NewButton("Start Raid 🔥", "Tự động Raid", function()
+    print("Bắt đầu raid!")
+    -- Code raid ở đây
+end)
 
-Button.MouseButton1Click:Connect(function()
-	game.StarterGui:SetCore("SendNotification", {
-		Title = "BảoHub";
-		Text = "Nút đã hoạt động!";
-		Duration = 5;
-	})
+-- 🧭 TAB: TELEPORT
+local TeleTab = Window:NewTab("Teleport")
+local TeleSection = TeleTab:NewSection("Di chuyển nhanh")
+TeleSection:NewDropdown("Đảo", {"Starter", "Desert", "Snow", "Marine"}, function(place)
+    print("Dịch chuyển đến: " .. place)
+    -- Code teleport đảo ở đây
+end)
+
+-- ⚙️ TAB: SETTINGS
+local SetTab = Window:NewTab("Cài đặt")
+local SetSection = SetTab:NewSection("Tùy chỉnh")
+SetSection:NewKeybind("Hiện / Ẩn GUI", "Phím mở menu", Enum.KeyCode.RightControl, function()
+	Library:ToggleUI()
 end)
