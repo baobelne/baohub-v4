@@ -1,3 +1,9 @@
+-- 📦 BẢOHUB V4 (Rayfield UI - Redz Style Full Version)
+
+local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/baobelne/rayfield-custom/main/loader.lua"))()
+local Player = game.Players.LocalPlayer
+local VirtualInputManager = game:GetService("VirtualInputManager")
+
 local Window = Rayfield:CreateWindow({
    Name = "✨ BẢOHUB V4 - Redz Style",
    LoadingTitle = "BẢOHUB V4 đang khởi động...",
@@ -11,10 +17,11 @@ local Window = Rayfield:CreateWindow({
       Enabled = false
    },
    KeySystem = false,
+   Logo = "https://i.imgur.com/X5Xxnh1.png",
+   LoadingImage = "https://i.imgur.com/X5Xxnh1.png"
 })
 
-
--- 🔥 TAB: FARM
+-- 🥷 TAB: FARM
 local FarmTab = Window:CreateTab("🥷 Auto Farm", 4483362458)
 local FarmSec = FarmTab:CreateSection("Auto Level")
 
@@ -38,41 +45,6 @@ FarmTab:CreateToggle({
       if v then AutoLevel() end
    end
 })
-_G.AutoClick = false
-
-FarmTab:CreateToggle({
-   Name = "Auto Attack (Chuột trái)",
-   CurrentValue = false,
-   Callback = function(v)
-      _G.AutoClick = v
-      if v then
-         AutoClick()
-      end
-   end
-}) 
-_G.AutoClick = false
-
-FarmTab:CreateToggle({
-   Name = "Auto Attack (vũ khí)",
-   CurrentValue = false,
-   Callback = function(v)
-      _G.AutoClick = v
-      if v then AutoClick() end
-   end
-})
-
-function AutoClick()
-   spawn(function()
-      while _G.AutoClick and wait(0.2) do
-         pcall(function()
-            local tool = Player.Character:FindFirstChildOfClass("Tool")
-            if tool then
-               tool:Activate()
-            end
-         end)
-      end
-   end)
-end
 
 function Equip()
    local Tool = Player.Backpack:FindFirstChild(_G.Weapon)
@@ -123,15 +95,49 @@ function AutoLevel()
       end
    end)
 end
+
+-- 🔥 Auto Attack
+_G.AutoClick = false
+FarmTab:CreateToggle({
+   Name = "Auto Attack (đánh thường)",
+   CurrentValue = false,
+   Callback = function(v)
+      _G.AutoClick = v
+      if v then AutoClick() end
+   end
 })
 
 function AutoClick()
    task.spawn(function()
-      while _G.AutoClick do task.wait()
+      while _G.AutoClick and wait(0.2) do
          pcall(function()
-            game:GetService("VirtualUser"):Button1Down(Vector2.new(0,0))
+            local tool = Player.Character:FindFirstChildOfClass("Tool")
+            if tool then
+               tool:Activate()
+            end
+         end)
+      end
+   end)
+end
+
+-- 🔥 Auto Skill Z/X/C/V
+_G.AutoZ = false
+_G.AutoX = false
+_G.AutoC = false
+_G.AutoV = false
+
+FarmTab:CreateToggle({ Name = "Auto Z", CurrentValue = false, Callback = function(v) _G.AutoZ = v if v then AutoSkill("Z") end end })
+FarmTab:CreateToggle({ Name = "Auto X", CurrentValue = false, Callback = function(v) _G.AutoX = v if v then AutoSkill("X") end end })
+FarmTab:CreateToggle({ Name = "Auto C", CurrentValue = false, Callback = function(v) _G.AutoC = v if v then AutoSkill("C") end end })
+FarmTab:CreateToggle({ Name = "Auto V", CurrentValue = false, Callback = function(v) _G.AutoV = v if v then AutoSkill("V") end end })
+
+function AutoSkill(key)
+   spawn(function()
+      while _G["Auto"..key] and wait(1) do
+         pcall(function()
+            VirtualInputManager:SendKeyEvent(true, Enum.KeyCode[key], false, game)
             wait(0.1)
-            game:GetService("VirtualUser"):Button1Up(Vector2.new(0,0))
+            VirtualInputManager:SendKeyEvent(false, Enum.KeyCode[key], false, game)
          end)
       end
    end)
