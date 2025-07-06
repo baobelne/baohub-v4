@@ -15,7 +15,7 @@ local Window = Rayfield:CreateWindow({
    Discord = {
       Enabled = false
    },
-   KeySystem = false
+   KeySystem = baobel
 })
 
 -- 🔥 TAB: FARM
