@@ -1,39 +1,36 @@
--- BẢOHUB V4 - GIAO DIỆN ĐA TAB
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
-local Window = Library.CreateLib("BẢOHUB V4 ✨", "Midnight")
+local Window = Library.CreateLib("BẢOHUB V4 ✨", "DarkTheme")
 
--- ⚔️ TAB: AUTO FARM
+-- TAB 1: FARM
 local FarmTab = Window:NewTab("Farm")
 local FarmSection = FarmTab:NewSection("Auto Farm")
-FarmSection:NewToggle("Auto Level", "Tự động farm level", function(state)
+FarmSection:NewToggle("Auto Level", "Farm level tự động", function(state)
     if state then
-        print("Đã bật auto level")
-        -- Gắn code farm vào đây
+        print("Bật Auto Level")
     else
-        print("Đã tắt auto level")
+        print("Tắt Auto Level")
     end
 end)
 
--- 🔥 TAB: RAID
+-- TAB 2: RAID
 local RaidTab = Window:NewTab("Raid")
 local RaidSection = RaidTab:NewSection("Auto Raid")
-RaidSection:NewButton("Start Raid 🔥", "Tự động Raid", function()
-    print("Bắt đầu raid!")
-    -- Code raid ở đây
+RaidSection:NewButton("Bắt đầu Raid", "Tự động raid", function()
+    print("Đã nhấn nút Raid")
 end)
 
--- 🧭 TAB: TELEPORT
+-- TAB 3: Teleport
 local TeleTab = Window:NewTab("Teleport")
-local TeleSection = TeleTab:NewSection("Di chuyển nhanh")
-TeleSection:NewDropdown("Đảo", {"Starter", "Desert", "Snow", "Marine"}, function(place)
+local TeleSection = TeleTab:NewSection("Dịch chuyển nhanh")
+TeleSection:NewDropdown("Chọn đảo", {"Starter", "Jungle", "Desert", "Snow"}, function(place)
     print("Dịch chuyển đến: " .. place)
-    -- Code teleport đảo ở đây
 end)
 
--- ⚙️ TAB: SETTINGS
+-- TAB 4: Settings
 local SetTab = Window:NewTab("Cài đặt")
-local SetSection = SetTab:NewSection("Tùy chỉnh")
-SetSection:NewKeybind("Hiện / Ẩn GUI", "Phím mở menu", Enum.KeyCode.RightControl, function()
-	Library:ToggleUI()
+local SetSection = SetTab:NewSection("Tùy chọn")
+SetSection:NewKeybind("Ẩn/Hiện GUI", "Phím mở/tắt GUI", Enum.KeyCode.RightControl, function()
+    Library:ToggleUI()
 end)
+
