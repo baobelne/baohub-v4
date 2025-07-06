@@ -1,17 +1,21 @@
+-- BẢOHUB V4 - ĐẦY ĐỦ GIAO DIỆN GIỐNG REDZHUB
+
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("BẢOHUB V4 ✨", "DarkTheme")
+
+-- 🥷 TAB: FARM
 local FarmTab = Window:NewTab("Farm")
-local FarmSection = FarmTab:NewSection("Tự động luyện cấp")
+local FarmSection = FarmTab:NewSection("Auto Farm")
 
 _G.AutoFarm = false
-_G.SelectedWeapon = "Combat" -- Thay bằng tên vũ khí bạn dùng (ví dụ: "Sharkman Karate")
+_G.SelectedWeapon = "Combat" -- đổi tên nếu dùng vũ khí khác
 
-FarmSection:NewToggle("Auto Level", "Tự động đánh quái theo cấp", function(state)
+FarmSection:NewToggle("Auto Level", "Farm theo level", function(state)
     _G.AutoFarm = state
-    if state then
-        AutoLevel()
-    end
+    if state then AutoLevel() end
 end)
 
-FarmSection:NewTextbox("Tên vũ khí", "Gõ đúng tên vũ khí bạn đang dùng", function(txt)
+FarmSection:NewTextbox("Tên vũ khí", "Ví dụ: Dragon Talon", function(txt)
     _G.SelectedWeapon = txt
 end)
 
@@ -29,7 +33,6 @@ function AutoLevel()
                 local lv = game.Players.LocalPlayer.Data.Level.Value
                 local mobName, mobQuest, questPos, mobPos = nil, nil, nil, nil
 
-                -- Bạn có thể thêm nhiều cấp hơn nếu muốn
                 if lv <= 10 then
                     mobName = "Bandit"
                     mobQuest = "BanditQuest1"
@@ -52,10 +55,10 @@ function AutoLevel()
                         if mob.Name == mobName and mob:FindFirstChild("HumanoidRootPart") then
                             repeat
                                 EquipWeapon()
-                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = mob.HumanoidRootPart.CFrame + Vector3.new(0, 3, 0)
-                                mob.HumanoidRootPart.Size = Vector3.new(60,60,60)
-                                mob.HumanoidRootPart.Transparency = 0.5
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = mob.HumanoidRootPart.CFrame + Vector3.new(0,3,0)
                                 mob.HumanoidRootPart.Anchored = true
+                                mob.HumanoidRootPart.Transparency = 0.5
+                                mob.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
                                 wait()
                             until mob.Humanoid.Health <= 0 or not _G.AutoFarm
                         end
@@ -66,21 +69,41 @@ function AutoLevel()
     end)
 end
 
-
-FarmSection:NewSection("Boss")
-
-local BossList = {"Saber Expert", "Bobby", "Yeti", "Magma Admiral"}
-FarmSection:NewDropdown("Chọn Boss", BossList, function(boss)
-    _G.SelectedBoss = boss
+-- 👹 TAB: RACE (khung sẵn)
+local RaceTab = Window:NewTab("Race")
+local RaceSection = RaceTab:NewSection("Race V4")
+RaceSection:NewButton("Mở Gương Race", "Auto farm Mirror Fractal + Mở Trial", function()
+    print("Tính năng đang cập nhật...")
 end)
 
-FarmSection:NewButton("Đánh Boss", "Tự tìm và đánh boss đã chọn", function()
-    local boss = game.Workspace.Enemies:FindFirstChild(_G.SelectedBoss)
-    if boss and boss:FindFirstChild("HumanoidRootPart") then
-        repeat
-            EquipWeapon()
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = boss.HumanoidRootPart.CFrame + Vector3.new(0,3,0)
-            wait()
-        until boss.Humanoid.Health <= 0
+-- 🌊 TAB: SEA
+local SeaTab = Window:NewTab("Sea")
+local SeaSection = SeaTab:NewSection("Săn Biển")
+SeaSection:NewButton("Auto Sea Beast", "Tự động săn rồng biển", function()
+    print("Tính năng đang cập nhật...")
+end)
+
+-- 🗺️ TAB: TELEPORT
+local TeleTab = Window:NewTab("Teleport")
+local TeleSection = TeleTab:NewSection("Dịch chuyển nhanh")
+
+local locations = {
+    Starter = CFrame.new(1085, 17, 1426),
+    Jungle = CFrame.new(-1619, 36, 143),
+    Desert = CFrame.new(1157, 5, 4322)
+}
+
+TeleSection:NewDropdown("Chọn đảo", {"Starter", "Jungle", "Desert"}, function(place)
+    local target = locations[place]
+    if target then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = target
     end
 end)
+
+-- ⚙️ TAB: CÀI ĐẶT
+local SetTab = Window:NewTab("Cài đặt")
+local SetSection = SetTab:NewSection("Tùy chỉnh")
+SetSection:NewKeybind("Ẩn/Hiện GUI", "Right Ctrl", Enum.KeyCode.RightControl, function()
+    Library:ToggleUI()
+end)
+
