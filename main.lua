@@ -11,10 +11,6 @@ local Window = Rayfield:CreateWindow({
       Enabled = false
    },
    KeySystem = false,
-
-   -- 📌 Gắn logo vào đây:
-   Logo = "https://i.imgur.com/X5Xxnh1.png",         -- ← ảnh bạn vừa gửi
-   LoadingImage = "https://i.imgur.com/X5Xxnh1.png"  -- ← ảnh hiển thị khi loading
 })
 
 
