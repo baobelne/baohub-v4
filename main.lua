@@ -16,6 +16,10 @@ local Window = Rayfield:CreateWindow({
       Enabled = false
    },
    KeySystem = false
+
+
+       Logo = "https://i.imgur.com/X5Xxnh1.png",         
+   LoadingImage = "https://i.imgur.com/X5Xxnh1.png"
 })
 
 -- 🔥 TAB: FARM
