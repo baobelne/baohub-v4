@@ -42,6 +42,30 @@ FarmTab:CreateToggle({
       if v then AutoLevel() end
    end
 })
+_G.AutoClick = false
+
+FarmTab:CreateToggle({
+   Name = "Auto Attack (Chuột trái)",
+   CurrentValue = false,
+   Callback = function(v)
+      _G.AutoClick = v
+      if v then
+         AutoClick()
+      end
+   end
+})
+
+function AutoClick()
+   task.spawn(function()
+      while _G.AutoClick do task.wait()
+         pcall(function()
+            game:GetService("VirtualUser"):Button1Down(Vector2.new(0,0))
+            wait(0.1)
+            game:GetService("VirtualUser"):Button1Up(Vector2.new(0,0))
+         end)
+      end
+   end)
+end
 
 function Equip()
    local Tool = Player.Backpack:FindFirstChild(_G.Weapon)
@@ -92,17 +116,6 @@ function AutoLevel()
       end
    end)
 end
-_G.AutoClick = false
-
-FarmTab:CreateToggle({
-   Name = "Auto Attack (Chuột trái)",
-   CurrentValue = false,
-   Callback = function(v)
-      _G.AutoClick = v
-      if v then
-         AutoClick()
-      end
-   end
 })
 
 function AutoClick()
