@@ -176,9 +176,9 @@ hookfunction(require(game:GetService("ReplicatedStorage").Effect.Container.Respa
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 Window = Fluent:CreateWindow({
     Title = "✨ BẢOHUB V4",
-    Subtitle = "By baobelne",
+    Subtitle = "Blox fruit",
     TabWidth=155, 
-    Theme="light",
+    Theme="Light",
     Acrylic=false,
     Size=UDim2.fromOffset(555, 320), 
     MinimizeKey = Enum.KeyCode.LeftControl
