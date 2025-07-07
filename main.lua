@@ -9330,9 +9330,26 @@ local notificationCooldown = 10
 local currentTime = tick()
 if currentTime - lastNotificationTime >= notificationCooldown then
     game.StarterGui:SetCore("SendNotification", {
-        Title = "Ten Hub",
-        Text = "Successfully",
-        Duration = 1
-    })
-    lastNotificationTime = currentTime
+       -- 📦 BẢOHUB V4 (Rayfield UI - Redz Style Full Version)
+local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/baobelne/rayfield-custom/main/loader.lua"))()
+local Player = game.Players.LocalPlayer
+local VirtualInputManager = game:GetService("VirtualInputManager")
+local Workspace = game:GetService("Workspace")
+local PathfindingService = game:GetService("PathfindingService")
+
+-- Tạo cửa sổ GUI
+local Window = Rayfield:CreateWindow({
+    Name = "✨ BẢOHUB V4 - Redz Style",
+    LoadingTitle = "BẢOHUB V4 đang khởi động...",
+    LoadingSubtitle = "By baobelne",
+    ConfigurationSaving = {
+        Enabled = true,
+        FolderName = "BảoHubV4",
+        FileName = "BảoCấuHình"
+    },
+    Discord = {
+        Enabled = false
+    },
+    KeySystem = false,
+})
 end
