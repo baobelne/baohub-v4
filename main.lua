@@ -175,10 +175,10 @@ hookfunction(require(game:GetService("ReplicatedStorage").Effect.Container.Death
 hookfunction(require(game:GetService("ReplicatedStorage").Effect.Container.Respawn), function() end)
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 Window = Fluent:CreateWindow({
-    Title = "✨ BẢOHUB V4",
-    Subtitle = "Blox fruit",
+   Title = "✨ BẢOHUB ",
+    SubTitle="Blox Fruits", 
     TabWidth=155, 
-    Theme="Light",
+    Theme="Darker",
     Acrylic=false,
     Size=UDim2.fromOffset(555, 320), 
     MinimizeKey = Enum.KeyCode.LeftControl
