@@ -1,5 +1,4 @@
- 
-_G.FastAttack = true
+ _G.FastAttack = true
 
 if _G.FastAttack then
     local _ENV = (getgenv or getrenv or getfenv)()
@@ -2321,7 +2320,7 @@ Button.Parent = ScreenGui
 Button.Size = UDim2.new(0, 50, 0, 50)
 Button.Position = UDim2.new(0.015, 0, 0.02, 20)
 Button.BackgroundTransparency = 1
-Button.Image = "rbxassetid://91347148253026"
+Button.Image = "rbxassetid://106929374373891"
 local UICorner = Instance.new("UICorner")
 
 UICorner.CornerRadius = UDim.new(1, 0)
@@ -9330,26 +9329,9 @@ local notificationCooldown = 10
 local currentTime = tick()
 if currentTime - lastNotificationTime >= notificationCooldown then
     game.StarterGui:SetCore("SendNotification", {
-       -- 📦 BẢOHUB V4 (Rayfield UI - Redz Style Full Version)
-local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/baobelne/rayfield-custom/main/loader.lua"))()
-local Player = game.Players.LocalPlayer
-local VirtualInputManager = game:GetService("VirtualInputManager")
-local Workspace = game:GetService("Workspace")
-local PathfindingService = game:GetService("PathfindingService")
-
--- Tạo cửa sổ GUI
-local Window = Rayfield:CreateWindow({
-    Name = "✨ BẢOHUB V4 - Redz Style",
-    LoadingTitle = "BẢOHUB V4 đang khởi động...",
-    LoadingSubtitle = "By baobelne",
-    ConfigurationSaving = {
-        Enabled = true,
-        FolderName = "BảoHubV4",
-        FileName = "BảoCấuHình"
-    },
-    Discord = {
-        Enabled = false
-    },
-    KeySystem = false,
-})
+        Title = "bảohub ",
+        Text = "Successfully",
+        Duration = 1
+    })
+    lastNotificationTime = currentTime
 end
