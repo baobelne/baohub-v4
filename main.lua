@@ -1,4 +1,4 @@
-  -- 📦 BẢOHUB V4 (Rayfield UI - Redz Style Full Version)
+-- 📦 BẢOHUB V4 (Rayfield UI - Redz Style Full Version)
 
 local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/baobelne/rayfield-custom/main/loader.lua"))()
 local Player = game.Players.LocalPlayer
@@ -123,9 +123,9 @@ function AutoLevel()
                         Equip()
                         local offset = Vector3.new(0,3,0)
                         if _G.AutoFloat then
-                           Player.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(offset)
+                           Player.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame + offset
                         else
-                           SmartMove(v.HumanoidRootPart.CFrame * CFrame.new(offset))
+                           SmartMove(v.HumanoidRootPart.CFrame + offset)
                         end
                         v.HumanoidRootPart.Anchored = true
                         v.HumanoidRootPart.Size = Vector3.new(60,60,60)
