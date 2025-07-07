@@ -175,16 +175,10 @@ hookfunction(require(game:GetService("ReplicatedStorage").Effect.Container.Death
 hookfunction(require(game:GetService("ReplicatedStorage").Effect.Container.Respawn), function() end)
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 Window = Fluent:CreateWindow({
-   local Window = Rayfield:CreateWindow({
-    Name = "✨ BẢOHUB V4 - Redz Style",
-    LoadingTitle = "BẢOHUB V4 đang khởi động...",
-    LoadingSubtitle = "By baobelne",
-    ConfigurationSaving = {
-        Enabled = true,
-        FolderName = "BảoHubV4",
-        FileName = "BảoCấuHình"
+    Title = "✨ BẢOHUB V4",
+    Subtitle = "By baobelne",
     TabWidth=155, 
-    Theme="Darker",
+    Theme="light",
     Acrylic=false,
     Size=UDim2.fromOffset(555, 320), 
     MinimizeKey = Enum.KeyCode.LeftControl
