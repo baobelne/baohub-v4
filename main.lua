@@ -123,13 +123,11 @@ function AutoLevel()
                         Equip()
                         local offset = Vector3.new(0,3,0)
                         if _G.AutoFloat then
-                           Player.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame + offset
+                           Player.Character.HumanoidRootPart.CFrame = CFrame.new(v.HumanoidRootPart.Position + Vector3.new(0, 6, 0))
                         else
                            SmartMove(v.HumanoidRootPart.CFrame + offset)
                         end
-                        v.HumanoidRootPart.Anchored = true
-                        v.HumanoidRootPart.Size = Vector3.new(60,60,60)
-                        v.HumanoidRootPart.Transparency = 0.5
+                        -- Đã gỡ chỉnh sửa hình dạng quái để tránh lỗi
                         wait()
                      until v.Humanoid.Health <= 0 or not _G.AutoFarm
                   end
